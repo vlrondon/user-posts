@@ -24,10 +24,21 @@ npm run dev        # http://localhost:5173
 | `npm run lint` | Linter (oxlint) |
 | `npm run build` | Comprobación de tipos y build de producción |
 
+### Configuración
+
+La URL de la API se lee de la variable de entorno `VITE_API_BASE_URL`. Es opcional: sin ella se usa `https://jsonplaceholder.typicode.com`. Para cambiarla:
+
+```bash
+cp .env.example .env   # y edita el valor
+```
+
+Vite lee el `.env` al arrancar, así que hay que reiniciar `npm run dev` tras modificarlo.
+
 ## Estructura
 
 ```
 src/
+  api/config.ts          URL base de la API (variable de entorno con valor por defecto)
   api/client.ts          Único punto de salida a la red (fetch + validación + ApiError)
   components/            Estados de carga y error reutilizables
   features/
@@ -44,6 +55,8 @@ src/
 **Zod como única definición de los datos.** Los tipos (`User`, `Post`, `NewPostValues`) se infieren de esquemas Zod, no se escriben a mano. El mismo mecanismo valida dos fronteras: lo que llega de la API (`apiFetch` rechaza una respuesta con forma inesperada en lugar de dejar pasar un `undefined` hasta la interfaz) y lo que escribe el usuario en el formulario.
 
 **Los componentes no conocen `fetch`.** Toda la red pasa por `api/client.ts`, que convierte fallos de red, respuestas HTTP de error y respuestas mal formadas en un único tipo `ApiError` con mensaje legible.
+
+**URL de la API configurable.** `api/config.ts` es el único sitio que lee `import.meta.env`; el resto del código (y los tests) importa `API_BASE_URL`. Tiene valor por defecto para que el proyecto arranque sin configurar nada, y `.env` no se versiona: la plantilla es `.env.example`.
 
 **TanStack Query para el estado de servidor.** Aporta carga, error, reintento y caché sin `useEffect` ni estado global. No hay Redux ni Context: el único estado de cliente es el texto del buscador (un `useState`) y el usuario elegido (la URL).
 
@@ -93,6 +106,7 @@ Trabajé con Claude (Anthropic) como agente de desarrollo. Lo cuento tal como fu
 
 1. Analizar el enunciado y proponer arquitectura, librerías y plan de commits, partiendo de los patrones que uso en mis proyectos (esquemas Zod como fuente única, capa de datos separada, organización por funcionalidad, un test por criterio de aceptación) y diciendo cuáles sobraban en una app de este tamaño.
 2. Implementar la propuesta en commits pequeños, cada uno con la app funcionando y los tests en verde.
+3. Después, hacer configurable la URL de la API con un `.env`, que en la primera versión estaba escrita en el código.
 
 **Qué acepté**
 

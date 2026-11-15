@@ -1,7 +1,9 @@
+import { API_BASE_URL } from '../api/config'
 import type { Post } from '../features/posts/post.schema'
 import type { User } from '../features/users/user.schema'
 
-export const API = 'https://jsonplaceholder.typicode.com'
+// Los tests simulan la misma URL que usa la app, venga de `.env` o del valor por defecto.
+export const API = API_BASE_URL
 
 export const users: User[] = [
   {

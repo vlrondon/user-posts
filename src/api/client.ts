@@ -1,6 +1,5 @@
 import type { z } from 'zod'
-
-const BASE_URL = 'https://jsonplaceholder.typicode.com'
+import { API_BASE_URL } from './config'
 
 /**
  * Error de la capa de datos. Distingue el fallo HTTP (con `status`) del fallo
@@ -28,7 +27,7 @@ export async function apiFetch<Schema extends z.ZodType>(
 ): Promise<z.infer<Schema>> {
   let response: Response
   try {
-    response = await fetch(`${BASE_URL}${path}`, init)
+    response = await fetch(`${API_BASE_URL}${path}`, init)
   } catch {
     throw new ApiError('No se pudo conectar con el servidor.')
   }
