@@ -1,3 +1,4 @@
+import type { Post } from '../features/posts/post.schema'
 import type { User } from '../features/users/user.schema'
 
 export const API = 'https://jsonplaceholder.typicode.com'
@@ -24,4 +25,9 @@ export const users: User[] = [
     email: 'clementine@example.com',
     company: { name: 'Romaguera-Jacobson' },
   },
+]
+
+export const postsOfLeanne: Post[] = [
+  { id: 1, userId: 1, title: 'Primer título', body: 'Primer texto.' },
+  { id: 2, userId: 1, title: 'Segundo título', body: 'Segundo texto.' },
 ]

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { NavLink } from 'react-router'
 import { ErrorState } from '../../components/ErrorState'
 import { LoadingState } from '../../components/LoadingState'
 import { filterUsersByName } from './filterUsers'
@@ -35,11 +36,14 @@ export function UsersPanel() {
       ) : (
         <ul className="user-list">
           {visibleUsers.map((user) => (
-            <li key={user.id} className="user-item">
-              <span className="user-item__name">{user.name}</span>
-              <span className="user-item__meta">
-                @{user.username} · {user.company.name}
-              </span>
+            <li key={user.id}>
+              {/* NavLink marca el usuario activo con aria-current="page". */}
+              <NavLink to={`/users/${user.id}`} className="user-item">
+                <span className="user-item__name">{user.name}</span>
+                <span className="user-item__meta">
+                  @{user.username} · {user.company.name}
+                </span>
+              </NavLink>
             </li>
           ))}
         </ul>

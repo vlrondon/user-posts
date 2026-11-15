@@ -167,3 +167,59 @@ textarea:focus-visible {
   background: var(--surface);
   color: var(--text);
 }
+
+/* Maestro-detalle: dos columnas en escritorio, una en móvil */
+.layout {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 800px) {
+  .layout {
+    grid-template-columns: 320px 1fr;
+    align-items: start;
+  }
+}
+
+a.user-item {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.user-item:hover {
+  background: var(--bg);
+}
+
+a.user-item[aria-current='page'] {
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+/* Publicaciones */
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.post {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.post__title {
+  font-size: 1rem;
+}
+
+.post__title::first-letter,
+.post__body::first-letter {
+  text-transform: uppercase;
+}
+
+.post__body {
+  color: var(--muted);
+  white-space: pre-line;
+}
