@@ -1,10 +1,10 @@
 import { http, HttpResponse } from 'msw'
 import { describe, expect, it } from 'vitest'
 import { z } from 'zod'
+import { API } from '../test/fixtures'
 import { server } from '../test/server'
 import { ApiError, apiFetch } from './client'
 
-const API = 'https://jsonplaceholder.typicode.com'
 const schema = z.object({ id: z.number() })
 
 describe('apiFetch', () => {
