@@ -8,5 +8,8 @@ export function usePosts(userId: number) {
   return useQuery({
     queryKey: postsQueryKey(userId),
     queryFn: () => fetchPostsByUser(userId),
+    // La API no persiste las publicaciones creadas: solo viven en esta caché.
+    // Si la lista se volviera a pedir en segundo plano, desaparecerían.
+    staleTime: Infinity,
   })
 }

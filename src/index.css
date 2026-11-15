@@ -223,3 +223,55 @@ a.user-item[aria-current='page'] {
   color: var(--muted);
   white-space: pre-line;
 }
+
+/* Formulario de nueva publicación */
+.post-form {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.post-form h3 {
+  font-size: 1rem;
+}
+
+.post-form__hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.field__input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.field__error {
+  font-size: 0.85rem;
+  color: var(--danger);
+}
+
+.post-form .state--error {
+  margin-bottom: 0.75rem;
+}
+
+.badge {
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  vertical-align: middle;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

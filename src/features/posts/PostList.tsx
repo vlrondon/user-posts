@@ -1,3 +1,4 @@
+import { isLocalPost } from './localPosts'
 import type { Post } from './post.schema'
 
 type PostListProps = {
@@ -13,7 +14,10 @@ export function PostList({ posts }: PostListProps) {
     <ul className="post-list" aria-label="Publicaciones">
       {posts.map((post) => (
         <li key={post.id} className="post">
-          <h3 className="post__title">{post.title}</h3>
+          <h3 className="post__title">
+            {post.title}
+            {isLocalPost(post) && <span className="badge">Nueva</span>}
+          </h3>
           <p className="post__body">{post.body}</p>
         </li>
       ))}

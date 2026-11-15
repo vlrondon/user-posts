@@ -2,6 +2,7 @@ import { useParams } from 'react-router'
 import { ErrorState } from '../../components/ErrorState'
 import { LoadingState } from '../../components/LoadingState'
 import { useUsers } from '../users/useUsers'
+import { NewPostForm } from './NewPostForm'
 import { PostList } from './PostList'
 import { usePosts } from './usePosts'
 
@@ -40,7 +41,11 @@ function UserPosts({ userId }: { userId: number }) {
           onRetry={() => refetch()}
         />
       ) : (
-        <PostList posts={posts} />
+        <>
+          {/* `key` reinicia el formulario (valores y errores) al cambiar de usuario. */}
+          <NewPostForm key={userId} userId={userId} />
+          <PostList posts={posts} />
+        </>
       )}
     </section>
   )
