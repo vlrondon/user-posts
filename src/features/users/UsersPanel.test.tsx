@@ -36,4 +36,23 @@ describe('Lista de usuarios', () => {
     expect(await screen.findByText('Leanne Graham')).toBeInTheDocument()
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
   })
+
+  it('filtra los usuarios por nombre al escribir en el buscador', async () => {
+    server.use(http.get(`${API}/users`, () => HttpResponse.json(users)))
+
+    const { user } = renderApp()
+    await screen.findByText('Leanne Graham')
+
+    const searchBox = screen.getByRole('searchbox', { name: 'Buscar por nombre' })
+    await user.type(searchBox, 'clem')
+
+    expect(screen.getByText('Clementine Bauch')).toBeInTheDocument()
+    expect(screen.queryByText('Leanne Graham')).not.toBeInTheDocument()
+    expect(screen.queryByText('Ervin Howell')).not.toBeInTheDocument()
+
+    await user.clear(searchBox)
+    await user.type(searchBox, 'zzz')
+
+    expect(screen.getByText(/Ningún usuario coincide/)).toBeInTheDocument()
+  })
 })
